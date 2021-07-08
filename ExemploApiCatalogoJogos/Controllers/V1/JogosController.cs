@@ -123,6 +123,27 @@ namespace ExemploApiCatalogoJogos.Controllers.V1
             {
                 return NotFound("Não existe este jogo");
             }
+        
+         /// <summary>
+        /// Atualizar o nome de um jogo
+        /// </summary>
+        /// /// <param name="idJogo">Id do jogo a ser atualizado</param>
+        /// <param name="preco">Novo preço do jogo</param>
+        /// <response code="200">Cao o preço seja atualizado com sucesso</response>
+        /// <response code="404">Caso não exista um jogo com este Id</response>   
+        [HttpPatch("{idJogo:guid}/nome/{nome:string}")]
+        public async Task<ActionResult> AtualizarJogo([FromRoute] Guid idJogo, [FromRoute] string nome)
+        {
+            try
+            {
+                await _jogoService.Atualizar_Nome(idJogo, nome);
+
+                return Ok();
+            }
+            catch (JogoNaoCadastradoException ex)
+            {
+                return NotFound("Não existe este jogo");
+            }
         }
 
         /// <summary>

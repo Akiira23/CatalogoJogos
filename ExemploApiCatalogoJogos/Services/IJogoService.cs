@@ -13,6 +13,7 @@ namespace ExemploApiCatalogoJogos.Services
         Task<JogoViewModel> Inserir(JogoInputModel jogo);
         Task Atualizar(Guid id, JogoInputModel jogo);
         Task Atualizar(Guid id, double preco);
+        Task Atualizar_Nome(Guid id, string nome);
         Task Remover(Guid id);
     }
 }
