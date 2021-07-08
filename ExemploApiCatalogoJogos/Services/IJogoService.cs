@@ -14,6 +14,7 @@ namespace ExemploApiCatalogoJogos.Services
         Task Atualizar(Guid id, JogoInputModel jogo);
         Task Atualizar(Guid id, double preco);
         Task Atualizar_Nome(Guid id, string nome);
+        Task Atualizar_Produtora(Guid id, string produtora);
         Task Remover(Guid id);
     }
 }

@@ -113,6 +113,18 @@ namespace ExemploApiCatalogoJogos.Services
             await _jogoRepository.Atualizar(entidadeJogo);
         }
 
+        public async Task Atualizar_Produtora(Guid id, string produtora)
+        {
+            var entidadeJogo = await _jogoRepository.Obter(id);
+
+            if (entidadeJogo == null)
+                throw new JogoNaoCadastradoException();
+
+            entidadeJogo.Produtora = produtora;
+
+            await _jogoRepository.Atualizar(entidadeJogo);
+        }
+
         public async Task Remover(Guid id)
         {
             var jogo = await _jogoRepository.Obter(id);

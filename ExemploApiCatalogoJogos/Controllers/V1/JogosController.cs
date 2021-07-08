@@ -124,7 +124,7 @@ namespace ExemploApiCatalogoJogos.Controllers.V1
                 return NotFound("Não existe este jogo");
             }
         
-         /// <summary>
+        /// <summary>
         /// Atualizar o nome de um jogo
         /// </summary>
         /// /// <param name="idJogo">Id do jogo a ser atualizado</param>
@@ -137,6 +137,28 @@ namespace ExemploApiCatalogoJogos.Controllers.V1
             try
             {
                 await _jogoService.Atualizar_Nome(idJogo, nome);
+
+                return Ok();
+            }
+            catch (JogoNaoCadastradoException ex)
+            {
+                return NotFound("Não existe este jogo");
+            }
+        }        
+        
+        /// <summary>
+        /// Atualizar a produtora de um jogo
+        /// </summary>
+        /// /// <param name="idJogo">Id do jogo a ser atualizado</param>
+        /// <param name="preco">Novo preço do jogo</param>
+        /// <response code="200">Cao o preço seja atualizado com sucesso</response>
+        /// <response code="404">Caso não exista um jogo com este Id</response>   
+        [HttpPatch("{idJogo:guid}/produtora/{nome:string}")]
+        public async Task<ActionResult> AtualizarProdutora([FromRoute] Guid idJogo, [FromRoute] string produtora)
+        {
+            try
+            {
+                await _jogoService.Atualizar_Produtora(idJogo, produtora);
 
                 return Ok();
             }
