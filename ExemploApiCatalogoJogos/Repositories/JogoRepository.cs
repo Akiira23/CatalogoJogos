@@ -31,6 +31,21 @@ namespace ExemploApiCatalogoJogos.Repositories
             return Task.FromResult(jogos[id]);
         }
 
+        public Task<Jogo> ObterMax(Guid id)
+        {
+            int max = 0;
+            Guid id_max = 0;
+            foreach (var jogo in jogos.Values)
+	        {
+                if (jogo.Preco > max)
+                {
+                    max = jogo.Preco;
+                    id_max = jogo.id;
+                }
+	        }
+            return Task.FromResult(jogos[id_max]);
+        }
+
         public Task<List<Jogo>> Obter(string nome, string produtora)
         {
             return Task.FromResult(jogos.Values.Where(jogo => jogo.Nome.Equals(nome) && jogo.Produtora.Equals(produtora)).ToList());

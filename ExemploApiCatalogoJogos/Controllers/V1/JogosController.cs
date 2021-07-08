@@ -61,6 +61,23 @@ namespace ExemploApiCatalogoJogos.Controllers.V1
         }
 
         /// <summary>
+        /// Buscar um jogo com maior valor
+        /// </summary>
+        /// <param name="idJogo">Id do jogo buscado</param>
+        /// <response code="200">Retorna o jogo filtrado</response>
+        /// <response code="204">Caso não haja jogo com este id</response>   
+        [HttpGet("{idJogo:guid}")]
+        public async Task<ActionResult<JogoViewModel>> ObterMax([FromRoute] Guid idJogo)
+        {
+            var jogo = await _jogoService.Obter_Max(idJogo);
+
+            if (jogo == null)
+                return NoContent();
+
+            return Ok(jogo);
+        }
+
+        /// <summary>
         /// Inserir um jogo no catálogo
         /// </summary>
         /// <param name="jogoInputModel">Dados do jogo a ser inserido</param>
@@ -132,7 +149,7 @@ namespace ExemploApiCatalogoJogos.Controllers.V1
         /// <response code="200">Cao o preço seja atualizado com sucesso</response>
         /// <response code="404">Caso não exista um jogo com este Id</response>   
         [HttpPatch("{idJogo:guid}/nome/{nome:string}")]
-        public async Task<ActionResult> AtualizarJogo([FromRoute] Guid idJogo, [FromRoute] string nome)
+        public async Task<ActionResult> AtualizarNome([FromRoute] Guid idJogo, [FromRoute] string nome)
         {
             try
             {
